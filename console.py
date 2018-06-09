@@ -20,6 +20,16 @@ class HBNBCommand(cmd.Cmd):
 
         return True
 
+    def do_create(self, line):
+
+    def do_show(self, line):
+
+    def do_destroy(self, line):
+
+    def do_all(self, line):
+
+    def do_update(self, line):
+
     def emptyline(self):
         """Empty lines will go to the next input loop"""
 
