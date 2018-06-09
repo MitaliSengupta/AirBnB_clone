@@ -6,6 +6,7 @@ line interpreter
 import cmd
 from models.base_model import BaseModel
 
+
 class HBNBCommand(cmd.Cmd):
     """
     class the custom command interpreter inherits
@@ -34,6 +35,8 @@ class HBNBCommand(cmd.Cmd):
         Prints the string representation of an instance based
         on the class name and id. Ex: $ show BaseModel 1234-1234-1234
         """
+        arg_list = args.split()
+
         if len(args.split()) == 0:
             print("** class name missing **")
             return
@@ -42,6 +45,42 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] not in self.classes:
             print("** class doesn't exist **")
         else:
+            dict_of_objs = models.storage.all()
+            for key in dict_of_objs.keys():
+                if arg_list[1] == dict_of_objs[key].id:
+                    print(dict_of_objs[key])
+                    return
+
+            print("** no instance found **")
+
+    def do_destroy(self, args):
+        """
+        Destroy command to delete an instance based on class name for id
+        """
+        arg_list = args.split()
+        if len(arg_list) == 0:
+            print("** class name missing **")
+        elif len(arg_list) < 2:
+            print("** instance id missing **")
+        elif args[1] not in self.classes:
+            print("** class doesn't exist **")
+        else:
+            dict_of_objs = models.storage.all()
+            for key in dict_of_objs.keys():
+                if arg_list[1] == dict_of_objs[key].id:
+                    del dict_of_objs[key]
+                    models.storage.save()
+                    return
+            print("** no instance found **")
+
+    def do_all(self, args):
+        arg_list = args.split()
+        if len(args) > 0:
+            if args[0] not in self.classes:
+                print("** class doesn't exist **")
+        dict_of_objs = models.storage.all()
+        for key in dict_of_objs.keys():
+            print(dict_of_objs[key])
             try:
                 with open(self.storage.__FileStorage__file_path,
                           encoding="UTF-8") as myfile:
@@ -50,6 +89,7 @@ class HBNBCommand(cmd.Cmd):
                 dump = None
                 print("** no instance found **")
                 return
+
 
     def do_quit(self, args):
         """
