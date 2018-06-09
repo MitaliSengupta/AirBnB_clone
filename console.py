@@ -5,7 +5,6 @@ line interpreter
 """
 import cmd
 from models.base_model import BaseModel
-import models
 
 
 class HBNBCommand(cmd.Cmd):
@@ -37,6 +36,7 @@ class HBNBCommand(cmd.Cmd):
         on the class name and id. Ex: $ show BaseModel 1234-1234-1234
         """
         arg_list = args.split()
+
         if len(args.split()) == 0:
             print("** class name missing **")
             return
@@ -81,6 +81,15 @@ class HBNBCommand(cmd.Cmd):
         dict_of_objs = models.storage.all()
         for key in dict_of_objs.keys():
             print(dict_of_objs[key])
+            try:
+                with open(self.storage.__FileStorage__file_path,
+                          encoding="UTF-8") as myfile:
+                    dump = json.load(myfile)
+            except FileNotFoundError:
+                dump = None
+                print("** no instance found **")
+                return
+
 
     def do_quit(self, args):
         """
