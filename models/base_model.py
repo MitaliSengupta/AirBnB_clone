@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import uuid
 from datetime import datetime
+import models
 
 """
 Base class for all models will contain id, created_at
@@ -26,6 +27,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         """
@@ -39,14 +41,15 @@ class BaseModel:
         Method to update attrb updated_at
         """
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """
         Method to return a dict containing all key/value of __dict__
         instance
         """
-        dic = dict(self.__dict__)
-        dic['__class__'] = self.__class__.__name__
+        dic = dict(**self.__dict__)
+        dic['__class__'] = str(type(self).__name__)
         dic['created_at'] = self.created_at.isoformat()
         dic['updated_at'] = self.updated_at.isoformat()
 
