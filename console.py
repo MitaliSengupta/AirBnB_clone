@@ -73,6 +73,15 @@ class HBNBCommand(cmd.Cmd):
                     return
             print("** no instance found **")
 
+    def do_all(self, args):
+        arg_list = args.split()
+        if len(args) > 0:
+            if args[0] not in self.classes:
+                print("** class doesn't exist **")
+        dict_of_objs = models.storage.all()
+        for key in dict_of_objs.keys():
+            print(dict_of_objs[key])
+
     def do_quit(self, args):
         """
         Quit command to exit out of the interpreter
