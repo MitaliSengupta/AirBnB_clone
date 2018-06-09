@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""FileStorage class that converts to and from JSON"""
+"""FileStorage class that converts to and from JSON to keep objects
+   persistent
+"""
 
 
 import json
