@@ -6,7 +6,9 @@ import cmd
 
 class HBNBCommand(cmd.Cmd):
 
-    prompt = '(hbnb) '
+    def __init__(self):
+        cmd.Cmd.__init__(self)
+        self.prompt = '(hbnb) '
 
     def do_EOF(self, line):
         """Typing the command 'EOF' will cleanly exit the console session"""
@@ -18,7 +20,7 @@ class HBNBCommand(cmd.Cmd):
 
         return True
 
-    def emptyline(line):
+    def emptyline(self):
         """Empty lines will go to the next input loop"""
 
         pass
