@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Place class that inherits from BaseModel"""
 
+
 class Place(BaseModel):
     """Place class that contains information on the housing unit"""
 
