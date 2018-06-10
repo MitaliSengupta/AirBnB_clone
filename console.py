@@ -37,10 +37,10 @@ class HBNBCommand(cmd.Cmd):
         """
         arg_list = args.split()
 
-        if len(args.split()) == 0:
+        if len(arg_list) == 0:
             print("** class name missing **")
             return
-        elif len(args.split()) < 2:
+        elif len(arg_list) < 2:
             print("** instance id missing **")
         elif args[0] not in self.classes:
             print("** class doesn't exist **")
@@ -62,7 +62,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif len(arg_list) < 2:
             print("** instance id missing **")
-        elif args[1] not in self.classes:
+        elif args[0] not in self.classes:
             print("** class doesn't exist **")
         else:
             dict_of_objs = models.storage.all()
