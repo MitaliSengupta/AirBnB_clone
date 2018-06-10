@@ -20,6 +20,7 @@ class HBNBCommand(cmd.Cmd):
     from cmd
     """
     prompt = '(hbnb) '
+
     classes = (
         'BaseModel',
         'User',
@@ -28,6 +29,10 @@ class HBNBCommand(cmd.Cmd):
         'City',
         'Amenity',
         'Review')
+  
+    classes = ('BaseModel')
+    filepath = models.storage._FileStorage.__file_path
+
 
     def do_create(self, args):
         """
@@ -48,6 +53,7 @@ class HBNBCommand(cmd.Cmd):
         """
         Prints the string representation of an instance based
         on the class name and id. Ex: $ show BaseModel 1234-1234-1234
+        prints the string representation of an instance
         """
         arg_list = args.split()
         key = arg_list[0] + "." + arg_list[1]
@@ -85,6 +91,8 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_all(self, args):
+      """
+      """
         arg_list = args.split()
         dict_of_objs = models.storage.all()
         if len(arg_list) > 0:
@@ -99,6 +107,49 @@ class HBNBCommand(cmd.Cmd):
         else:
             for key in dict_of_objs.keys():
                 print(dict_of_objs[key])
+        """
+        All command to display all objects that currently exist
+        """
+        try:
+            with open(self.fp, encoding="UTF-8") as myfile:
+                dump = json.load(myfile)
+        except FileNotFoundError:
+            dump = None
+        tokens = args.split()
+        instances = []
+        if len(tokens) > 0 and tokens[0] in self.classes:
+            cls = tokens[0]
+        elif len(tokens) > 0 and tokens[0] not in self.classes:
+            print("** class doesn't exist **")
+            return
+        else:
+            cls = None
+        if dump:
+            if cls is not None:
+                for key, val in dump.items():
+                    if val['__class__'] == cls:
+                        del val['__class__']
+                        model = eval(cls)(**val)
+                        instances.append(model)
+            elif cls is None:
+                for key, val in dump.items():
+                    cls = val['__class__']
+                    del val['__class__']
+                    model = eval(cls)(**val)
+                    instances.append(model)
+            if len(instances) > 0:
+                print(instances)
+        if dump is None and len(tokens) > 0 and cls is not None:
+            pass
+
+    def do_update(self, args):
+        """
+        Update command to add or update an attribute
+        """
+        arg_list = args.split()
+        if args[0] not in self.classes:
+            print("** class doesn't exist **")
+
 
     def do_quit(self, args):
         """
