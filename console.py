@@ -14,7 +14,7 @@ class HBNBCommand(cmd.Cmd):
     Class that inherits from cmd.Cmd
     """
     prompt = '(hbnb) '
-    classes = ('BaseModel')
+    classes = {'BaseModel'}
 
     def do_create(self, args):
         """
@@ -51,7 +51,34 @@ class HBNBCommand(cmd.Cmd):
             if name not in objects:
                 print("** no instance found **")
             else:
-                return (objects[name])
+               print(objects[name])
+        else:
+            print("** class doesn't exist **")
+
+    def do_destroy(self, args):
+        """
+        Deletes an instance based on the class name and id
+        saves the changes into JSON file
+        """
+        if not args:
+            print("** class name missing **")
+            return
+        tokens = args.split(" ")
+        objects = storage.all()
+
+        if tokens[0] in self.classes:
+            if len(tokens) < 2:
+                print("** instance id missing **")
+                return
+            name = tokens[0] + "." + tokens[1]
+            if name not in objects:
+                print("** no instance found **")
+            else:
+                obj = objects[name]
+                if obj:
+                    objs = storage.all()
+                    del objs["{}.{}".format(type(obj).__name__, obj.id)]
+                    storage.save()
         else:
             print("** class doesn't exist **")
 
