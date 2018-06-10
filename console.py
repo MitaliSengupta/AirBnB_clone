@@ -1,39 +1,83 @@
 #!/usr/bin/python3
-"""Entry point for the command interpreter of the HBNB application"""
-
-
+"""
+This module contains the command interpeter
+for managing Airbnb files
+"""
 import cmd
+from models.base_model import BaseModel
+from models.user import User
+from models import storage
+
 
 class HBNBCommand(cmd.Cmd):
+    """
+    Class that inherits from cmd.Cmd
+    """
+    prompt = '(hbnb) '
+    classes = ('BaseModel')
 
-    def __init__(self):
-        cmd.Cmd.__init__(self)
-        self.prompt = '(hbnb) '
+    def do_create(self, args):
+        """
+        Creates a new instance of BaseModel, saves it to JSON file
+        and prints the id
+        """
+        if not args:
+            print("** class name missing **")
+            return
+        tokens = args.split(" ")
+        if tokens[0] in self.classes:
+            new = eval("{}()".format(tokens[0]))
+            new.save()
+            print("{}".format(new.id))
+        else:
+            print("** class doesn't exist **")
 
-    def do_EOF(self, line):
-        """Typing the command 'EOF' will cleanly exit the console session"""
+    def do_show(self, args):
+        """
+        Prints the string representation of an instance based
+        on the class name and id
+        """
+        if not args:
+            print("** class name missing **")
+            return
+        tokens = args.split(" ")
+        objects = storage.all()
 
-        return True
+        if tokens[0] in self.classes:
+            if len(tokens) < 2:
+                print("** instance id missing **")
+                return
+            name = tokens[0] + "." + tokens[1]
+            if name not in objects:
+                print("** no instance found **")
+            else:
+                return (objects[name])
+        else:
+            print("** class doesn't exist **")
 
-    def do_quit(self, line):
-        """Typing 'quit' will cleanly exit the console session"""
+    def do_quit(self, args):
+        """
+        Quit command exits out of the command interpreter
+        """
+        quit()
 
-        return True
+    def do_EOF(self, args):
+        """
+        EOF command exits out of the command interpreter
+        """
+        quit()
 
-    def do_create(self, line):
-
-    def do_show(self, line):
-
-    def do_destroy(self, line):
-
-    def do_all(self, line):
-
-    def do_update(self, line):
+    def do_help(self, args):
+        """
+        Command lists all help details for each command
+        """
+        cmd.Cmd.do_help(self, args)
 
     def emptyline(self):
-        """Empty lines will go to the next input loop"""
+        """
+        Returns back to the prompt
+        """
+        return
 
-        pass
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     HBNBCommand().cmdloop()
