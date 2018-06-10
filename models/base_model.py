@@ -12,7 +12,6 @@ class BaseModel:
     """
     Instantiation of class BaseModel
     """
-
     def __init__(self, *args, **kwargs):
         """
         initializing variables
