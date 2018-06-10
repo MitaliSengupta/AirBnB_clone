@@ -5,7 +5,7 @@ line interpreter
 """
 import cmd
 from models.base_model import BaseModel
-
+import models
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -37,10 +37,10 @@ class HBNBCommand(cmd.Cmd):
         """
         arg_list = args.split()
 
-        if len(args.split()) == 0:
+        if len(arg_list) == 0:
             print("** class name missing **")
             return
-        elif len(args.split()) < 2:
+        elif len(arg_list) < 2:
             print("** instance id missing **")
         elif args[0] not in self.classes:
             print("** class doesn't exist **")
@@ -62,7 +62,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif len(arg_list) < 2:
             print("** instance id missing **")
-        elif args[1] not in self.classes:
+        elif args[0] not in self.classes:
             print("** class doesn't exist **")
         else:
             dict_of_objs = models.storage.all()
@@ -74,6 +74,9 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_all(self, args):
+        """
+        All command to display all objects that currently exist
+        """
         arg_list = args.split()
         if len(args) > 0:
             if args[0] not in self.classes:
@@ -89,6 +92,14 @@ class HBNBCommand(cmd.Cmd):
                 dump = None
                 print("** no instance found **")
                 return
+
+    def do_update(self, args):
+        """
+        Update command to add or update an attribute
+        """
+        arg_list = args.split()
+        if args[0] not in self.classes:
+            print("** class doesn't exist **")
 
 
     def do_quit(self, args):
