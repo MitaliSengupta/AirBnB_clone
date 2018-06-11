@@ -14,7 +14,7 @@ class HBNBCommand(cmd.Cmd):
     Class that inherits from cmd.Cmd
     """
     prompt = '(hbnb) '
-    classes = {'BaseModel', 'User'}
+    classes = allclasses
 
     def do_create(self, args):
         """
