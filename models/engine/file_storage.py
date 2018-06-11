@@ -6,7 +6,13 @@ for serialization and deserialization of data.
 """
 import json
 import models
-
+from models.user import User
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.base_model import BaseModel
 
 class FileStorage:
     """
@@ -29,7 +35,7 @@ class FileStorage:
         sets in __objects with key id
         """
         if obj:
-            self.__objects["{}.{}".format(str(type(obj).__name__),
+            self.__objects["{}.{}".format(obj.__class__.__name__,
                                           obj.id)] = obj
 
     def save(self):
@@ -52,7 +58,8 @@ class FileStorage:
             with open(self.__file_path, mode="r", encoding="UTF-8") as myfile:
                 object = json.load(myfile)
             for id, dic in object.items():
-                value = models.BaseModel(**dic)
-                self.__objects[id] = value
+                value = dic["__class__"]
+                obj = eval(value)(**dic)
+                self.__objects[id] = obj
         except FileNotFoundError:
             pass
