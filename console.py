@@ -14,7 +14,7 @@ class HBNBCommand(cmd.Cmd):
     Class that inherits from cmd.Cmd
     """
     prompt = '(hbnb) '
-    classes = {'BaseModel'}
+    classes = {'BaseModel', 'User'}
 
     def do_create(self, args):
         """
@@ -100,6 +100,41 @@ class HBNBCommand(cmd.Cmd):
                 if name[0:len(tokens[0])] == tokens[0]:
                     instances.append(objects[name])
             print(instances)
+        else:
+            print("** class doesn't exist **")
+
+    def do_update(self, args):
+        """
+        Update an instance based on the class name and id by adding
+        or updating attribute (save the change into the JSON file).
+        """
+        if not args:
+            print("** class name missing **")
+            return
+        tokens = args.split(" ")
+        objects = storage.all()
+
+        if tokens[0] in self.classes:
+            if len(tokens) < 2:
+                print("** instance id missing **")
+                return
+            name = tokens[0] + "." + tokens[1]
+            if name not in objects:
+                print("** no instance found **")
+            else:
+                obj = objects[name]
+                untouchable = ["id", "created_at", "updated_at"]
+                if obj:
+                    token = args.split(" ")
+                    objs = storage.all()
+                    if len(token) < 3:
+                        print("** attribute name missing **")
+                    elif len(token) < 4:
+                        print("** value missing **")
+                    elif token[2] not in untouchable:
+                        obj.__dict__[token[2]] = token[3]
+                        obj.updated_at = datetime.now()
+                        storage.save()
         else:
             print("** class doesn't exist **")
 
