@@ -6,7 +6,8 @@ for managing Airbnb files
 import cmd
 from models.base_model import BaseModel
 from models.user import User
-from models import storage
+from models import storage, allclasses
+from datetime import datetime
 
 
 class HBNBCommand(cmd.Cmd):
@@ -126,7 +127,6 @@ class HBNBCommand(cmd.Cmd):
                 untouchable = ["id", "created_at", "updated_at"]
                 if obj:
                     token = args.split(" ")
-                    objs = storage.all()
                     if len(token) < 3:
                         print("** attribute name missing **")
                     elif len(token) < 4:

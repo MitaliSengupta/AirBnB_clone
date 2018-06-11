@@ -1,14 +1,14 @@
 #!/usr/bin/python3
+"""
+Class User inherits from BaseModel
+"""
 from models.base_model import BaseModel
-"""
-This module contains a class
-User that inherits from BaseModel
-"""
-
 
 class User(BaseModel):
     """
-    Class that inherits from Basemodel class
+    This class has public attributes and will use
+    FileStorage in engine folder to manage serialization
+    and deserialization of User
     """
     email = ""
     password = ""
