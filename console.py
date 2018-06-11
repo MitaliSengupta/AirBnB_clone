@@ -51,7 +51,7 @@ class HBNBCommand(cmd.Cmd):
             if name not in objects:
                 print("** no instance found **")
             else:
-               print(objects[name])
+                print(objects[name])
         else:
             print("** class doesn't exist **")
 
@@ -79,6 +79,27 @@ class HBNBCommand(cmd.Cmd):
                     objs = storage.all()
                     del objs["{}.{}".format(type(obj).__name__, obj.id)]
                     storage.save()
+        else:
+            print("** class doesn't exist **")
+
+    def do_all(self, args):
+        """
+        Prints all string representation of all instances
+        based or not on the class name
+        """
+        objects = storage.all()
+        instances = []
+        if not args:
+            for name in objects:
+                instances.append(objects[name])
+            print(instances)
+            return
+        tokens = args.split(" ")
+        if tokens[0] in self.classes:
+            for name in objects:
+                if name[0:len(tokens[0])] == tokens[0]:
+                    instances.append(objects[name])
+            print(instances)
         else:
             print("** class doesn't exist **")
 
