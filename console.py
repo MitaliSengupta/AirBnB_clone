@@ -4,6 +4,7 @@ This module contains the command interpeter
 for managing Airbnb files
 """
 import cmd
+import models
 from models.base_model import BaseModel
 from models.user import User
 from models import storage, allclasses
@@ -13,7 +14,7 @@ from models.state import State
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-
+import shlex
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -35,29 +36,6 @@ class HBNBCommand(cmd.Cmd):
             new = eval("{}()".format(tokens[0]))
             new.save()
             print("{}".format(new.id))
-        else:
-            print("** class doesn't exist **")
-
-    def do_show(self, args):
-        """
-        Prints the string representation of an instance based
-        on the class name and id
-        """
-        if not args:
-            print("** class name missing **")
-            return
-        tokens = args.split(" ")
-        objects = storage.all()
-
-        if tokens[0] in self.classes:
-            if len(tokens) < 2:
-                print("** instance id missing **")
-                return
-            name = tokens[0] + "." + tokens[1]
-            if name not in objects:
-                print("** no instance found **")
-            else:
-                print(objects[name])
         else:
             print("** class doesn't exist **")
 
@@ -114,32 +92,108 @@ class HBNBCommand(cmd.Cmd):
         Update an instance based on the class name and id by adding
         or updating attribute (save the change into the JSON file).
         """
-        if not args:
-            print("** class name missing **")
-            return
-        tokens = args.split(" ")
-        objects = storage.all()
-
-        if tokens[0] in self.classes:
-            if len(tokens) < 2:
-                print("** instance id missing **")
+        try:
+            if not args:
+                print("** class name missing **")
                 return
-            name = tokens[0] + "." + tokens[1]
-            if name not in objects:
-                print("** no instance found **")
+            tokens = args.split(" ")
+            objects = storage.all()
+            if tokens[0] in self.classes:
+                if len(tokens) < 2:
+                    print("** instance id missing **")
+                    return
+                name = tokens[0] + "." + tokens[1]
+                if name not in objects:
+                    print("** no instance found **")
+                else:
+                    obj = objects[name]
+                    untouchable = ["id", "created_at", "updated_at"]
+                    if obj:
+                        token = args.split(" ")
+                        if len(token) < 3:
+                            print("** attribute name missing **")
+                        elif len(token) < 4:
+                            print("** value missing **")
+                        elif token[2] not in untouchable:
+                            obj.__dict__[token[2]] = token[3]
+                            obj.updated_at = datetime.now()
+                            storage.save()
             else:
-                obj = objects[name]
-                untouchable = ["id", "created_at", "updated_at"]
-                if obj:
-                    token = args.split(" ")
-                    if len(token) < 3:
-                        print("** attribute name missing **")
-                    elif len(token) < 4:
-                        print("** value missing **")
-                    elif token[2] not in untouchable:
-                        obj.__dict__[token[2]] = token[3]
-                        obj.updated_at = datetime.now()
-                        storage.save()
+                print("** class doesn't exist **")
+        except AttributeError:
+            print("** attribute name missing **")
+
+    def do_show(self, args):
+        """ show string representation of an instance"""
+        tokens = args.split()
+        objects = storage.all()
+        try:
+            if len(tokens) == 0:
+                print("** class name missing **")
+                return
+            if tokens[0] in self.classes:
+                if len(tokens) > 1:
+                    key = tokens[0] + "." + tokens[1]
+                    if key in objects:
+                        obj = objects[key]
+                        print(obj)
+                    else:
+                        print("** no instance found **")
+                else:
+                    print("** instance id missing **")
+            else:
+                print("** class doesn't exist **")
+        except AttributeError:
+            print("** instance id missing **")
+
+    def do_dict(self, args):
+        """
+        """
+        tokens = args.split(' ', 2)
+        print(tokens)
+        update_dict = json.loads(tokens[2].replace("'", '"'))
+        print(update_dict)
+        if self.storage._FileStorage__objects.get('{}.{}'.format(tokens[0], args[1][1:-1]), None) is None:
+            print("** no instance found **")
+        else:
+            obj = self.storage._FileStorage__objects['{}.{}'.format(args[0], args[1][1:-1])]
+            for k, v in update_dict.items():
+                if getattr(obj, k, None) is not None:
+                    setattr(obj, k, type(
+                        getattr(obj, k, None))(v))
+                else:
+                    setattr(obj, k, v)
+            models.storage.save()
+
+    def default(self, args):
+        """
+        default method to use with command()
+        """
+        tokens = args.split(".")
+        cls = tokens[0]
+        uuid = shlex.split(tokens[1])
+        fields = uuid[0].split("(")
+        uuid[0] = fields[1]
+        new_cmd = []
+        for item in uuid:
+            new_cmd.append(item[:])
+        fields = fields[0]
+        execute = fields + " " + cls + " " + " ".join(new_cmd)
+        final = execute[:-1]
+        self.onecmd(final)
+
+    def do_count(self, args):
+        """
+        Counts number of instances of a class
+        """
+        objects = storage.all()
+        instances = []
+        count = 0
+        if args in self.classes:
+            for name in objects:
+                if name[0:len(args)] == args:
+                    count += 1
+            print(count)
         else:
             print("** class doesn't exist **")
 
