@@ -148,6 +148,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_dict(self, args):
         """
+        doesn't work properly
         """
         tokens = args.split(' ', 2)
         print(tokens)
