@@ -36,6 +36,15 @@ class BaseModel:
         return ("[{}] ({}) {}".format(str(type(self).__name__),
                                       self.id, str(self.__dict__)))
 
+    def __repr__(self):
+        """
+        Method returns official repreentations
+        of string
+        """
+        cls = self.__class__.__name__
+        string = ("[{}] ({}) {}".format(cls, self.id, self.__dict__))
+        return (string)
+
     def save(self):
         """
         Method to update attrb updated_at
