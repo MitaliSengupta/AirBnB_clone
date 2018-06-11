@@ -85,6 +85,10 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_all(self, args):
+        """
+        All command to display all instances of a class or all objects
+        """
+        object_list = []
         arg_list = args.split()
         dict_of_objs = models.storage.all()
         if len(arg_list) > 0:
@@ -93,11 +97,37 @@ class HBNBCommand(cmd.Cmd):
             else:
                 for key in dict_of_objs.keys():
                     if dict_of_objs[key].__class__.__name__ == arg_list[0]:
-                        print(dict_of_objs[key])
+                        object_list.append(dict_of_objs[key])
                 return
         else:
             for key in dict_of_objs.keys():
-                print(dict_of_objs[key])
+                object_list.append(dict_of_objs[key])
+
+        print(object_list)
+
+    def do_update(self, args):
+        """
+        Update command to update or add an attribute to an instance
+        """
+        arg_list = args.split()
+        dict_of_objs = models.storage.all()
+        if len(arg_list) == 0:
+            print("** class name missing **")
+        elif arg_list[0] not in self.classes:
+            print("** class doesn't exist **")
+        elif len(arg_list) == 1:
+            print("** instance id missing **")
+        elif len(arg_list) == 2:
+            print("** attribute name missing **")
+        elif len(arg_list) == 3:
+            print("** value missing **")
+        else:
+            key = arg_list[0] + "." + arg_list[1]
+            if key in dict_of_objs:
+                setattr(dict_of_objs[key], arg_list[2], eval(arg_list[3]))
+                dict_of_objs[key].save()
+            else:
+                print("** no instance found **")
 
     def do_quit(self, args):
         """
@@ -124,7 +154,6 @@ class HBNBCommand(cmd.Cmd):
         display prompt
         """
         pass
-
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
