@@ -148,53 +148,25 @@ class HBNBCommand(cmd.Cmd):
         except AttributeError:
             print("** instance id missing **")
 
-    def default(self, arg):
-        """Default when command prefix not recognized."""
-        s = (arg.replace('.', ' ').replace('(', ' ').replace(')', ' '))
-        print("HERE IS s...", s)
-        l = s.split()
-        print("Here is l...", l)
-        if len(l) > 1:
-            cmd = l.pop(1)
-            print("HERE IS CMD...", cmd)
-        if '{' in s and cmd == 'update':
-            s = s.replace('update', '')
-            print("HERE IS NEW s....", s)
-            d = re.spllit(r"\s(?!{[^{]*})", s)
-            print("\n\n Here is new d...", d)
-        """
-            for k, v in eval(d[3]).items():
-                print(l[0]), print(l[1]), print(k), print(v)
-                args = l[0] + ' ' + l[1][:-1] + ' ' + k + ' ' + str(v)
-                self.do_update(args)
-            return
-        args = ' '.join(l).replace(',', '')
-        try:
-            eval('self.do_' + cmd + '(args)')
-        except:
-            print('Invalid argument.')"""
-    """        
     def default(self, args):
-        ""
+        """
         default method to use with command()
-        ""
-        tokens = args.split(".")
-        cls = tokens[0]
-        uuid = shlex.split(tokens[1])
-        fields = uuid[0].split("(")
-        uuid[0] = fields[1]
-        new_cmd = []
-        for item in uuid:
-            print("HERE IS THE ITEM", type(item), item)
-            new_cmd.append(item[:])
-            if '{' in item in cls == "update":
-                print("I AM HERE")
-                
-        fields = fields[0]
-        execute = fields + " " + cls + " " + " ".join(new_cmd)
-        final = execute[:-1]
-        self.onecmd(final)
-      """
+        """
+        try:
+            tokens = args.split(".")
+            cls = tokens[0]
+            uuid = shlex.split(tokens[1])
+            fields = uuid[0].split("(")
+            uuid[0] = fields[1]
+            new_cmd = []
+            for item in uuid:
+                new_cmd.append(item[:])
+            fields = fields[0]
+            execute = fields + " " + cls + " " + " ".join(new_cmd)
+            final = execute[:-1]
+            self.onecmd(final)
+        except:
+            print("** invalid command **")
 
     def do_count(self, args):
         """
