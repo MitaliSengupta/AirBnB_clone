@@ -94,36 +94,33 @@ class HBNBCommand(cmd.Cmd):
         Update an instance based on the class name and id by adding
         or updating attribute (save the change into the JSON file).
         """
-        try:
-            if not args:
-                print("** class name missing **")
+        if not args:
+            print("** class name missing **")
+            return
+        tokens = args.split(" ")
+        objects = storage.all()
+        if tokens[0] in self.classes:
+            if len(tokens) < 2:
+                print("** instance id missing **")
                 return
-            tokens = args.split(" ")
-            objects = storage.all()
-            if tokens[0] in self.classes:
-                if len(tokens) < 2:
-                    print("** instance id missing **")
-                    return
-                name = tokens[0] + "." + tokens[1]
-                if name not in objects:
-                    print("** no instance found **")
-                else:
-                    obj = objects[name]
-                    untouchable = ["id", "created_at", "updated_at"]
-                    if obj:
-                        token = args.split(" ")
-                        if len(token) < 3:
-                            print("** attribute name missing **")
-                        elif len(token) < 4:
-                            print("** value missing **")
-                        elif token[2] not in untouchable:
-                            obj.__dict__[token[2]] = token[3]
-                            obj.updated_at = datetime.now()
-                            storage.save()
+            name = tokens[0] + "." + tokens[1]
+            if name not in objects:
+                print("** no instance found **")
             else:
-                print("** class doesn't exist **")
-        except AttributeError:
-            print("** attribute name missing **")
+                obj = objects[name]
+                untouchable = ["id", "created_at", "updated_at"]
+                if obj:
+                    token = args.split(" ")
+                    if len(token) < 3:
+                        print("** attribute name missing **")
+                    elif len(token) < 4:
+                        print("** value missing **")
+                    elif token[2] not in untouchable:
+                        obj.__dict__[token[2]] = token[3]
+                        obj.updated_at = datetime.now()
+                        storage.save()
+        else:
+            print("** class doesn't exist **")
 
     def do_show(self, args):
         """ show string representation of an instance"""
@@ -164,6 +161,7 @@ class HBNBCommand(cmd.Cmd):
             fields = fields[0]
             execute = fields + " " + cls + " " + " ".join(new_cmd)
             final = execute[:-1]
+            final = final.replace(',', '')
             self.onecmd(final)
         except:
             print("** invalid command **")
