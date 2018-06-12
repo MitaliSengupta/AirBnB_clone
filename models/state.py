@@ -1,9 +1,12 @@
 #!/usr/bin/python3
-"""State class that inherits from BaseModel"""
-
+"""
+module inherits from BaseModel class
+"""
 from models.base_model import BaseModel
 
-class State(BaseModel):
-    """State class containing a name"""
 
+class State(BaseModel):
+    """
+    public class attrb name
+    """
     name = ""

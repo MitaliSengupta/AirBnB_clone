@@ -2,6 +2,8 @@
 import uuid
 from datetime import datetime
 import models
+
+
 """
 Base class for all models will contain id, created_at
 and updated at attributes. Save() and to_json() methods
@@ -34,6 +36,15 @@ class BaseModel:
         """
         return ("[{}] ({}) {}".format(str(type(self).__name__),
                                       self.id, str(self.__dict__)))
+
+    def __repr__(self):
+        """
+        Method returns official repreentations
+        of string
+        """
+        cls = self.__class__.__name__
+        string = ("[{}] ({}) {}".format(cls, self.id, self.__dict__))
+        return (string)
 
     def save(self):
         """

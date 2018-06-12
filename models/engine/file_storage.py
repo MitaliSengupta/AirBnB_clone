@@ -21,6 +21,7 @@ class FileStorage:
         Public instance method to return
         the dictionary __objects
         """
+        self.reload()
         return (self.__objects)
 
     def new(self, obj):
@@ -38,8 +39,8 @@ class FileStorage:
         to the JSON file
         """
         dic = {}
-        for id, object in self.__objects.items():
-            dic[id] = object.to_dict()
+        for id, objs in self.__objects.items():
+            dic[id] = objs.to_dict()
         with open(self.__file_path, mode="w", encoding="UTF-8") as myfile:
             json.dump(dic, myfile)
 
@@ -49,10 +50,10 @@ class FileStorage:
         to __objects only if file exists
         """
         try:
-            with open(self.__file_path, mode="r", encoding="UTF-8") as myfile:
-                object = json.load(myfile)
-            for id, dic in object.items():
-                value = models.BaseModel(**dic)
-                self.__objects[id] = value
+            with open(self.__file_path, encoding="UTF-8") as myfile:
+                obj = json.load(myfile)
+            for key, value in obj.items():
+                name = models.allclasses[value["__class__"]](**value)
+                self.__objects[key] = name
         except FileNotFoundError:
             pass

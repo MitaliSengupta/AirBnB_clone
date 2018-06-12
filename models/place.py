@@ -1,17 +1,19 @@
 #!/usr/bin/python3
-"""Place class that inherits from BaseModel"""
-
+"""
+module inherits from BaseModel
+"""
 from models.base_model import BaseModel
 
-class Place(BaseModel):
-    """Place class that contains information on the housing unit"""
 
+class Place(BaseModel):
+    """
+    class has public attributes
+    """
     city_id = ""
     user_id = ""
     name = ""
     description = ""
     number_rooms = 0
-    number_bathrooms = 0
     max_guest = 0
     price_by_night = 0
     latitude = 0.0
