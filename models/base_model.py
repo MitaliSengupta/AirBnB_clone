@@ -34,8 +34,14 @@ class BaseModel:
         """
         Method returns string representation
         """
-        return ("[{}] ({}) {}".format(str(type(self).__name__),
-                                      self.id, str(self.__dict__)))
+        return ("[{}] ({}) {}".format(self.__class__.__name__,
+                                      self.id, self.__dict__))
+
+    def __repr__(self):
+        """
+        Method returns string representation
+        """
+        return self.__str__()
 
     def __repr__(self):
         """
@@ -59,7 +65,7 @@ class BaseModel:
         instance
         """
         dic = dict(**self.__dict__)
-        dic['__class__'] = str(type(self).__name__)
+        dic['__class__'] = str(self.__class__.__name__)
         dic['created_at'] = self.created_at.isoformat()
         dic['updated_at'] = self.updated_at.isoformat()
 
