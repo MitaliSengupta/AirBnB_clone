@@ -21,7 +21,6 @@ class FileStorage:
         Public instance method to return
         the dictionary __objects
         """
-        self.reload()
         return (self.__objects)
 
     def new(self, obj):
