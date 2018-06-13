@@ -63,6 +63,7 @@ class TestBaseModel(unittest.TestCase):
         basemodel2_dict = self.basemodel2.__dict__
         self.assertIsInstance(basemodel2_dict['created_at'], datetime)
         self.assertIsInstance(basemodel2_dict['updated_at'], datetime)
+        self.assertTrue(self.basemodel2.created_at == self.basemodel2.updated_at)
 
     def test_save(self):
         """
