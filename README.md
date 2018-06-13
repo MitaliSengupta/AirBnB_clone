@@ -1,15 +1,15 @@
 <img src="https://www.holbertonschool.com/holberton-logo-twitter-card.png">
 
-### Airbnb Clone Console
+## Airbnb Clone Console
 
-#### Description
+### Description
 Over the course of the next few months, we at [Holberton School](https://www.holbertonschool.com/) will be creating a clone of the AirBnb application. This repository contains the code for one of the preliminary steps of this whole project: the console. As can be seen in the following image of the stack and architecture we will be using for this project, the console will serve as the core of the back-end side and will be written in Python. This console will connect directly to storage engines of which there will eventually be two: database and file storage. We focus on file storage in this particular instance.
 
 <p><img src="https://s3.amazonaws.com/intranet-projects-files/concepts/74/hbnb_step5.png" alt="Technology" width="42" height="22"></p>
 
 This repository contains several packages that include the various models that will be employed in the application as objects, a file storage schema class, and various tests written using the unittest module of Python.
 
-#### Files in This Repository
+### Files in This Repository
 ---
 | File                   | File Hierarchy                                       | Description
 |------------------------|------------------------------------------------------|--------------------------------------|
@@ -33,40 +33,103 @@ This repository contains several packages that include the various models that w
 | `test_file_storage.py` | [tests/test_models/test_engine/test_file_storage.py](tests/test_models/test_engine/test_file_storage.py) | The unittest module for file storage |
 ---
 
+### Usage
+
 #### Basic Usage of The Console
 ---
-| Command    | Usage                                    | Example                                           | Functionality                       |
-|------------|------------------------------------------|---------------------------------------------------|-------------------------------------|
-| `help`     | `help`                                   | `help`                                            | displays a list of the commands     |
-| `create`   | `create <class>`                         | `create User`                                     | creates a new instance of a class   |
-| `show`     | `show <class> <id>`                      | `show User 123-123-123`                           | shows a specific instance           |
-| `destroy`  | `destroy <class> <id>`                   | `destroy User 123-123-123`                        | deletes a specific instance         |
-| `all`      | `all` or `all <class>`                   | `all User`                                        | shows all instances or a class      |
-| `update`   | `update <class> <id> <attribute> <value> | `update User 123-123-123 email 'hello@hello.com'` | updates an attribute of an instance |
-| `quit`     | `quit`                                   | `quit`                                            | quits the console                   |
+| Command    | Usage                                     | Example                                           | Functionality                       |
+|------------|-------------------------------------------|---------------------------------------------------|-------------------------------------|
+| `help`     | `help`                                    | `help`                                            | displays a list of the commands     |
+| `create`   | `create <class>`                          | `create User`                                     | creates a new instance of a class   |
+| `show`     | `show <class> <id>`                       | `show User 123-123-123`                           | shows a specific instance           |
+| `destroy`  | `destroy <class> <id>`                    | `destroy User 123-123-123`                        | deletes a specific instance         |
+| `all`      | `all` or `all <class>`                    | `all User`                                        | shows all instances or a class      |
+| `update`   | `update <class> <id> <attribute> <value>` | `update User 123-123-123 email 'hello@hello.com'` | updates an attribute of an instance |
+| `count`    | `<class>.count`                           | `User.count`                                      | counts the number of instances      |
+| `quit`     | `quit`                                    | `quit`                                            | quits the console                   |
 ---
 
-#### Advanced Usage of The Console
+#### Advanced Command Usage of The Console
 ---
-| Command    | Usage                   | Functionality                    |
-|------------|-------------------------|----------------------------------|
-| `help`     |                         |                                  |
-| `create`   |                         |                                  |
-| `show`     |                         |                                  |
-| `destroy`  |                         |                                  |
-| `all`      |                         |                                  |
-| `update`   |                         |                                  |
-| `quit`     |                         |                                  |
-| `EOF`      |                         |                                  |
+| Command         | Usage                                          | Example Usage                                              |
+|-----------------|------------------------------------------------|------------------------------------------------------------|
+| `show`          | `<class>.show(<id>)`                           | `User.show(123-123-123)`                                   |
+| `destroy`       | `<class>.destroy(<id>)`                        | `User.destroy(123-123-123)`                                |
+| `all`           | `<class>.all`                                  | `User.all`                                                 |
+| `update`        | `<class>.update(<id>, <attribute>, <value>)`   | `User.update(123-123-123, email, 'hello@hello.com')`       |
+| `update` (dict) | `<class>.update(<id>, <dictionary>)`           | `User.update(123-123-123, {'email' : 'hello@hello.com'})`  |
 ---
 
-#### Installation
+### Installation
+```
+git clone git@github.com:MitaliSengupta/AirBnB_clone.git
+```
 
+### Example Usage
 
+#### Interactive Mode
+```
+$ ./console.py
+(hbnb) help
 
-#### Example Usage
+Documented commands (type help <topic>):
+========================================
+EOF  all  count  create  destroy  help  quit  show  update
+(hbnb)
+(hbnb)
+(hbnb) quit
+$
+```
+```
+$ ./console.py
+(hbnb) create BaseModel
+5dccfbf9-03a6-45f7-8a75-80094392bf97
+(hbnb) show BaseModel 5dccfbf9-03a6-45f7-8a75-80094392bf97
+[BaseModel] (5dccfbf9-03a6-45f7-8a75-80094392bf97) {'id': '5dccfbf9-03a6-45f7-8a75-80094392bf97', 'updated_at': datetime.datetime(2018, 6, 13, 23, 10, 13, 549740), 'created_at': datetime.datetime(2018, 6, 13, 23, 10, 13, 549699)}
+(hbnb) all
+[[BaseModel] (5dccfbf9-03a6-45f7-8a75-80094392bf97) {'id': '5dccfbf9-03a6-45f7-8a75-80094392bf97', 'updated_at': datetime.datetime(2018, 6, 13, 23, 10, 13, 549740), 'created_at': datetime.datetime(2018, 6, 13, 23, 10, 13, 549699)}]
+(hbnb) BaseModel.count
+1
+(hbnb) update BaseModel 5dccfbf9-03a6-45f7-8a75-80094392bf97 number 89
+(hbnb) show BaseModel 5dccfbf9-03a6-45f7-8a75-80094392bf97
+[BaseModel] (5dccfbf9-03a6-45f7-8a75-80094392bf97) {'number': '89', 'updated_at': datetime.datetime(2018, 6, 13, 23, 11, 51, 470426), 'created_at': datetime.datetime(2018, 6, 13, 23, 10, 13, 549699), 'id': '5dccfbf9-03a6-45f7-8a75-80094392bf97'}
+(hbnb) create User
+71e19890-6440-4ca9-9976-59ba61571f09
+(hbnb) all
+[[User] (71e19890-6440-4ca9-9976-59ba61571f09) {'id': '71e19890-6440-4ca9-9976-59ba61571f09', 'updated_at': datetime.datetime(2018, 6, 13, 23, 12, 39, 71568), 'created_at': datetime.datetime(2018, 6, 13, 23, 12, 39, 71532)}, [BaseModel] (5dccfbf9-03a6-45f7-8a75-80094392bf97) {'number': '89', 'updated_at': datetime.datetime(2018, 6, 13, 23, 11, 51, 470426), 'created_at': datetime.datetime(2018, 6, 13, 23, 10, 13, 549699), 'id': '5dccfbf9-03a6-45f7-8a75-80094392bf97'}]
+(hbnb) destroy User 71e19890-6440-4ca9-9976-59ba61571f09
+(hbnb) all
+[[BaseModel] (5dccfbf9-03a6-45f7-8a75-80094392bf97) {'number': '89', 'updated_at': datetime.datetime(2018, 6, 13, 23, 11, 51, 470426), 'created_at': datetime.datetime(2018, 6, 13, 23, 10, 13, 549699), 'id': '5dccfbf9-03a6-45f7-8a75-80094392bf97'}]
+(hbnb) destroy BaseModel 5dccfbf9-03a6-45f7-8a75-80094392bf97
+(hbnb) all
+[]
+(hbnb) quit
+$
+```
 
+#### Non-Interactive Mode
+```
+$ echo "help" | ./console.py
+(hbnb)
+Documented commands (type help <topic>):
+========================================
+EOF  all  count  create  destroy  help  quit  show  update
 
+(hbnb) $
+$
+$ echo "create BaseModel" | ./console.py
+(hbnb) f09bfbad-532d-4bbe-a2c1-815b1958f01e
+(hbnb) $
+$ echo "all" | ./console.py
+(hbnb) [[BaseModel] (f09bfbad-532d-4bbe-a2c1-815b1958f01e) {'id': 'f09bfbad-532d-4bbe-a2c1-815b1958f01e', 'updated_at': datetime.datetime(2018, 6, 13, 23, 16, 30, 420332), 'created_at': datetime.datetime(2018, 6, 13, 23, 16, 30, 420300)}]
+(hbnb) $
+$ echo "destroy BaseModel f09bfbad-532d-4bbe-a2c1-815b1958f01e" | ./console.py
+(hbnb) (hbnb) $
+$ echo "all" | ./console.py
+(hbnb) []
+(hbnb) $
+$
+```
 
 ### Technologies Used
 * Language: Python3
@@ -74,5 +137,7 @@ This repository contains several packages that include the various models that w
 * Style: PEP8 Ver. 1.7
 
 ### Authors
-Mitali Sengupta
-Derek Kwok
+
+Mitali Sengupta - [Twitter: @aadhiBangalan](https://twitter.com/aadhiBangalan)
+
+Derek Kwok - [Twitter: @dlangshk](https://twitter.com/dlangshk)
