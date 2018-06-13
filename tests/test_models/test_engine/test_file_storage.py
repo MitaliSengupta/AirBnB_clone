@@ -18,100 +18,69 @@ from models.engine.file_storage import FileStorage
 
 class TestFileStorage(unittest.TestCase):
     """
-    Unittest for the FileStorage class
+    testing file storage
     """
 
     @classmethod
     def setUpClass(cls):
-        cls.mitali = User()
-        cls.mitali.id = '123123123'
-        cls.mitali.email = "mitali@emailaddress.com"
-        cls.mitali.password = "password"
-        cls.mitali.first_name = "Mitali"
-        cls.mitali.last_name = ""
+        cls.usr = User()
+        cls.usr.first_name = "Tay"
+        cls.usr.last_name = "lor"
+        cls.usr.email = "taylor@gmail.com"
 
     @classmethod
     def teardown(cls):
-        del cls.mitali
+        del cls.usr
 
     def teardown(self):
         try:
             os.remove("file.json")
-        except Exception:
+        except:
             pass
 
     def test_style_check(self):
         """
-        PEP8 style tests
+        Tests pep8 style
         """
         style = pep8.StyleGuide(quiet=True)
         p = style.check_files(['models/engine/file_storage.py'])
         self.assertEqual(p.total_errors, 0, "fix pep8")
 
-    def test_functions_present(self):
-        """
-        Tests that all functions are present
-        """
-        storage = FileStorage()
-        self.assertTrue('all' in dir(storage))
-        self.assertTrue('new' in dir(storage))
-        self.assertTrue('save' in dir(storage))
-        self.assertTrue('reload' in dir(storage))
-        self.assertTrue(storage.all.__doc__ is not None)
-        self.assertTrue(storage.new.__doc__ is not None)
-        self.assertTrue(storage.save.__doc__ is not None)
-        self.assertTrue(storage.reload.__doc__ is not None)
-
     def test_all(self):
         """
-        Tests the all() method of the file storage scheme
-        Returns the __objects variable
+        Tests method: all (returns dic <class>.<id> : <obj instance>)
         """
-        storage = FileStorage()
-        self.instance_dict = storage.all()
-        self.assertIsNotNone(self.instance_dict)
-        self.assertIsInstance(self.instance_dict, dict)
-        self.assertIs(self.instance_dict, storage._FileStorage__objects)
+        fstorage = FileStorage()
+        instances_dic = fstorage.all()
+        self.assertIsNotNone(instances_dic)
+        self.assertEqual(type(instances_dic), dict)
+        self.assertIs(instances_dic, fstorage._FileStorage__objects)
 
     def test_new(self):
         """
-        Tests the new() method of the file storage scheme
-        Saves a new instance to the __objects variable
+        Tests method: new (saves object into dictionary)
         """
-        storage = FileStorage()
-        self.instance_dict = storage.all()
-        storage.new(self.mitali)
-        key = self.mitali.__class__.__name__ + "." + self.mitali.id
-        self.assertEqual(key, 'User.123123123')
-        self.assertIsNotNone(self.instance_dict[key])
-
-    def test_save(self):
-        """
-        Test save function of the file storage scheme
-        Saves the JSON representation of a python dictionary to a file
-        """
-        self.instance = BaseModel()
-        self.instance.save()
-        self.assertTrue(os.path.isfile("file.json"))
+        n_storage = FileStorage()
+        dic = n_storage.all()
+        rev = User()
+        rev.id = 999999
+        rev.name = "Tassadar"
+        n_storage.new(rev)
+        key = rev.__class__.__name__ + "." + str(rev.id)
+        self.assertIsNotNone(dic[key])
 
     def test_reload(self):
         """
-        Tests for the reload() function of the file scheme
-        Recreates __objects variable
+        Tests method: reload (reloads objects from string file)
         """
-        storage = FileStorage()
+        r_storage = FileStorage()
         try:
             os.remove("file.json")
-        except FileNotFoundError:
+        except:
             pass
         with open("file.json", "w") as f:
             f.write("{}")
         with open("file.json", "r") as r:
             for line in r:
                 self.assertEqual(line, "{}")
-        self.assertIs(storage.reload(), None)
-        # Test if reloading works with newly created instance
-        self.instance = BaseModel()
-        self.instance.save()
-        storage.reload()
-        self.assertIsNotNone(storage._FileStorage__objects)
+        self.assertIs(r_storage.reload(), None)
