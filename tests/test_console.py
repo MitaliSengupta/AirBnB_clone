@@ -41,7 +41,9 @@ class TestConsole(unittest.TestCase):
         del cls.cnsl
 
     def tearDown(self):
-        """Remove temporary file (file.json) created as a result"""
+        """
+        Remove temporary file (file.json) created as a result
+        """
         try:
             os.remove("file.json")
         except:
@@ -53,7 +55,7 @@ class TestConsole(unittest.TestCase):
         p = style.check_files(["console.py"])
         self.assertEqual(p.total_errors, 0, 'fix Pep8')
 
-    def test_docstrings_in_console(self):
+    def test_docstrings(self):
         """checking for docstrings"""
         self.assertIsNotNone(console.__doc__)
         self.assertIsNotNone(HBNBCommand.emptyline.__doc__)
@@ -68,111 +70,111 @@ class TestConsole(unittest.TestCase):
         self.assertIsNotNone(HBNBCommand.strip_clean.__doc__)
         self.assertIsNotNone(HBNBCommand.default.__doc__)
 
-    def test_emptyline(self):
+    def test_empty(self):
         """Test empty line input"""
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("\n")
+            self.cnsl.onecmd("\n")
             self.assertEqual('', f.getvalue())
 
     def test_quit(self):
         """test quit command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("quit")
+            self.cnsl.onecmd("quit")
             self.assertEqual('', f.getvalue())
 
     def test_create(self):
         """Test create command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("create")
+            self.cnsl.onecmd("create")
             self.assertEqual(
                 "** class name missing **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("create asdfsfsd")
+            self.cnsl.onecmd("create asdfsfsd")
             self.assertEqual(
                 "** class doesn't exist **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("create User")
-            self.consol.onecmd("create Place")
+            self.cnsl.onecmd("create User")
+            self.cnsl.onecmd("create Place")
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("all User")
+            self.cnsl.onecmd("all User")
             self.assertEqual(
                 "[[User]",f.getvalue()[:7])
 
     def test_show(self):
         """Test cmd output: show"""
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("show")
+            self.cnsl.onecmd("show")
             self.assertEqual(
                 "** class name missing **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("show asdfsdrfs")
+            self.cnsl.onecmd("show asdfsdrfs")
             self.assertEqual(
                 "** class doesn't exist **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("show BaseModel")
+            self.cnsl.onecmd("show BaseModel")
             self.assertEqual(
                 "** instance id missing **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("show City abcd-123")
+            self.cnsl.onecmd("show City abcd-123")
             self.assertEqual(
                 "** no instance found **\n", f.getvalue())
 
     def test_destroy(self):
         """Test cmd output: destroy"""
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("destroy")
+            self.cnsl.onecmd("destroy")
             self.assertEqual(
                 "** class name missing **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("destroy Galaxy")
+            self.cnsl.onecmd("destroy Galaxy")
             self.assertEqual(
                 "** class doesn't exist **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("destroy User")
+            self.cnsl.onecmd("destroy User")
             self.assertEqual(
                 "** instance id missing **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("destroy BaseModel 12345")
+            self.cnsl.onecmd("destroy BaseModel 12345")
             self.assertEqual(
                 "** no instance found **\n", f.getvalue())
 
     def test_all(self):
         """Test all command inpout"""
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("all asdfsdfsd")
+            self.cnsl.onecmd("all asdfsdfsd")
             self.assertEqual("** class doesn't exist **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("all State")
+            self.cnsl.onecmd("all State")
             self.assertEqual("[]\n", f.getvalue())
 
     def test_update(self):
         """Test cmd output: update"""
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("update")
+            self.cnsl.onecmd("update")
             self.assertEqual(
                 "** class name missing **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("update sldkfjsl")
+            self.cnsl.onecmd("update sldkfjsl")
             self.assertEqual(
                 "** class doesn't exist **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("update User")
+            self.cnsl.onecmd("update User")
             self.assertEqual(
                 "** instance id missing **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("update User 12345")
+            self.cnsl.onecmd("update User 12345")
             self.assertEqual(
                 "** no instance found **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("all User")
+            self.cnsl.onecmd("all User")
             obj = f.getvalue()
         my_id = obj[obj.find('(')+1:obj.find(')')]
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("update User " + my_id)
+            self.cnsl.onecmd("update User " + my_id)
             self.assertEqual(
                 "** attribute name missing **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
-            self.consol.onecmd("update User " + my_id + " Name")
+            self.cnsl.onecmd("update User " + my_id + " Name")
             self.assertEqual(
                 "** value missing **\n", f.getvalue())
 
