@@ -43,7 +43,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsNotNone(BaseModel.save.__doc__)
         self.assertIsNotNone(BaseModel.to_dict.__doc__)
 
-    def test_attr(self):
+    def test_attributes(self):
         """
         Test function presence
         """
@@ -73,15 +73,7 @@ class TestBaseModel(unittest.TestCase):
         object = self.basemodel1
         self.assertNotEqual(object.created_at, object.updated_at)
 
-    def test_to_dict_before(self):
-        """
-        Test to_dict function
-        """
-        self.assertEqual(self.basemodel1.__class__.__name__, 'BaseModel')
-        self.assertIsInstance(self.basemodel1.__dict__['created_at'], datetime)
-        self.assertIsInstance(self.basemodel1.__dict__['updated_at'], datetime)
-
-    def test_to_dict_after(self):
+    def test_to_dict(self):
         """
         Test after to_dict call
         """
