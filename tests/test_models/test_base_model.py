@@ -46,7 +46,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(isinstance(self.base12, BaseModel))
 
     def test_save(self):
-        self.base1.save()
+        self.base12.save()
         self.assertNotEqual(self.base12.created_at, self.base12.updated_at)
 
     def test_to_dict(self):
