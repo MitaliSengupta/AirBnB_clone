@@ -3,18 +3,19 @@
 ## Airbnb Clone Console
 
 ### Contents
-[Description](https://github.com/MitaliSengupta/AirBnB_clone#description)
-[Files in This Repository](https://github.com/MitaliSengupta/AirBnB_clone#files-in-this-repository)
-[Usage](https://github.com/MitaliSengupta/AirBnB_clone#usage)
-[Installation](https://github.com/MitaliSengupta/AirBnB_clone#installation)
-[Example Usage](https://github.com/MitaliSengupta/AirBnB_clone#example-usage)
-[Technologies Used](https://github.com/MitaliSengupta/AirBnB_clone#technologies-used)
-[Authors](https://github.com/MitaliSengupta/AirBnB_clone#authors)
+
+#### [Description](https://github.com/MitaliSengupta/AirBnB_clone#description)
+#### [Files in This Repository](https://github.com/MitaliSengupta/AirBnB_clone#files-in-this-repository)
+#### [Usage](https://github.com/MitaliSengupta/AirBnB_clone#usage)
+#### [Installation](https://github.com/MitaliSengupta/AirBnB_clone#installation)
+#### [Example Usage](https://github.com/MitaliSengupta/AirBnB_clone#example-usage)
+#### [Technologies Used](https://github.com/MitaliSengupta/AirBnB_clone#technologies-used)
+#### [Authors](https://github.com/MitaliSengupta/AirBnB_clone#authors)
 
 ### Description
 Over the course of the next few months, we at [Holberton School](https://www.holbertonschool.com/) will be creating a clone of the AirBnb application. This repository contains the code for one of the preliminary steps of this whole project: the console. As can be seen in the following image of the stack and architecture we will be using for this project, the console will serve as the core of the back-end side and will be written in Python. This console will connect directly to storage engines of which there will eventually be two: database and file storage. We focus on file storage in this particular instance.
 
-<p><img src="https://s3.amazonaws.com/intranet-projects-files/concepts/74/hbnb_step5.png" alt="Technology" width="419" height="223"></p>
+<p><img src="https://s3.amazonaws.com/intranet-projects-files/concepts/74/hbnb_step5.png" alt="Technology" width="629" height="335"></p>
 
 This repository contains several packages that include the various models that will be employed in the application as objects, a file storage schema class, and various tests written using the unittest module of Python.
 
