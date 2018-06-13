@@ -73,20 +73,29 @@ class TestBaseModel(unittest.TestCase):
         object = self.basemodel1
         self.assertNotEqual(object.created_at, object.updated_at)
 
-    def test_to_dict(self):
+    def test_to_dict_before(self):
         """
         Test to_dict function
         """
         self.assertEqual(self.basemodel1.__class__.__name__, 'BaseModel')
-        # test before to_dict() call
         self.assertIsInstance(self.basemodel1.__dict__['created_at'], datetime)
         self.assertIsInstance(self.basemodel1.__dict__['updated_at'], datetime)
-        # test after to_dict() call
+
+    def test_to_dict_after(self):
+        """
+        Test after to_dict call
+        """
         basemodel1_dict = self.basemodel1.to_dict()
         self.assertEqual(basemodel1_dict['__class__'], 'BaseModel')
         self.assertIsInstance(basemodel1_dict['created_at'], str)
         self.assertIsInstance(basemodel1_dict['updated_at'], str)
 
+    def test_string_output(self):
+        """
+        Test the __str__ function
+        """
+        basemodel3 = BaseModel()
+        self.assertIsInstance(basemodel3.__str__(), str)
 
 if __name__ == "__main__":
     unittest.main()
