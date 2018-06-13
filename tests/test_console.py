@@ -66,8 +66,6 @@ class TestConsole(unittest.TestCase):
         self.assertIsNotNone(HBNBCommand.do_destroy.__doc__)
         self.assertIsNotNone(HBNBCommand.do_all.__doc__)
         self.assertIsNotNone(HBNBCommand.do_update.__doc__)
-        self.assertIsNotNone(HBNBCommand.count.__doc__)
-        self.assertIsNotNone(HBNBCommand.strip_clean.__doc__)
         self.assertIsNotNone(HBNBCommand.default.__doc__)
 
     def test_empty(self):
@@ -77,7 +75,7 @@ class TestConsole(unittest.TestCase):
             self.assertEqual('', f.getvalue())
 
     def test_quit(self):
-        """test quit command inpout"""
+        """test quit command input"""
         with patch('sys.stdout', new=StringIO()) as f:
             self.cnsl.onecmd("quit")
             self.assertEqual('', f.getvalue())
@@ -98,7 +96,7 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             self.cnsl.onecmd("all User")
             self.assertEqual(
-                "[[User]",f.getvalue()[:7])
+                "[[User]", f.getvalue()[:7])
 
     def test_show(self):
         """Test cmd output: show"""
