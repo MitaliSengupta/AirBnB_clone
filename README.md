@@ -60,7 +60,6 @@ This repository contains several packages that include the various models that w
 | `update`   | `update <class> <id> <attribute> <value>` | `update User 123-123-123 email 'hello@hello.com'` | updates an attribute of an instance |
 | `count`    | `<class>.count`                           | `User.count`                                      | counts the number of instances      |
 | `quit`     | `quit`                                    | `quit`                                            | quits the console                   |
----
 
 #### Advanced Command Usage of The Console
 ---
