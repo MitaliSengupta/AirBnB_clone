@@ -149,20 +149,20 @@ class HBNBCommand(cmd.Cmd):
         """
         default method to use with command()
         """
+        s = (args.replace('.', ' ').replace('(', ' ').replace(')', ' '))
+        tok = s.split()
+        if len(tok) > 1:
+            cmd = tok.pop(1)
+        if '{' in s and cmd == 'update':
+            s = s.replace('update', '')
+            dic = re.split(r"\s(?![^{]*})", s)
+            for key, val in eval(dic[3]).items():
+                arg = tok[0] + ' ' + tok[1][:-1] + ' ' + key + ' ' + str(val)
+                self.do_update(arg)
+            return
+        arg = ' '.join(tok).replace(',', '')
         try:
-            tokens = args.split(".")
-            cls = tokens[0]
-            uuid = shlex.split(tokens[1])
-            fields = uuid[0].split("(")
-            uuid[0] = fields[1]
-            new_cmd = []
-            for item in uuid:
-                new_cmd.append(item[:])
-            fields = fields[0]
-            execute = fields + " " + cls + " " + " ".join(new_cmd)
-            final = execute[:-1]
-            final = final.replace(',', '')
-            self.onecmd(final)
+            eval('self.do_' + cmd + '(arg)')
         except:
             print("** invalid command **")
 
