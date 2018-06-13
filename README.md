@@ -4,13 +4,13 @@
 
 ### Contents
 
-#### [Description](https://github.com/MitaliSengupta/AirBnB_clone#description-1)
-#### [Files in This Repository](https://github.com/MitaliSengupta/AirBnB_clone#files-in-this-repository-1)
-#### [Usage](https://github.com/MitaliSengupta/AirBnB_clone#usage-1)
-#### [Installation](https://github.com/MitaliSengupta/AirBnB_clone#installation-1)
-#### [Example Usage](https://github.com/MitaliSengupta/AirBnB_clone#example-usage-1)
-#### [Technologies Used](https://github.com/MitaliSengupta/AirBnB_clone#technologies-used-1)
-#### [Authors](https://github.com/MitaliSengupta/AirBnB_clone#authors-1)
+* [Description](https://github.com/MitaliSengupta/AirBnB_clone#description)
+* [Files in This Repository](https://github.com/MitaliSengupta/AirBnB_clone#files-in-this-repository)
+* [Usage](https://github.com/MitaliSengupta/AirBnB_clone#usage)
+* [Installation](https://github.com/MitaliSengupta/AirBnB_clone#installation)
+* [Example Usage](https://github.com/MitaliSengupta/AirBnB_clone#example-usage)
+* [Technologies Used](https://github.com/MitaliSengupta/AirBnB_clone#technologies-used)
+* [Authors](https://github.com/MitaliSengupta/AirBnB_clone#authors)
 ---
 
 ### Description
