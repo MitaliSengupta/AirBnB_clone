@@ -86,7 +86,7 @@ class TestBaseModel(unittest.TestCase):
         Test after to_dict call
         """
         basemodel1_dict = self.basemodel1.to_dict()
-        self.assertEqual(basemodel1_dict['__class__'], 'BaseModel')
+        self.assertEqual(self.basemodel1.__class__.__name__, 'BaseModel')
         self.assertIsInstance(basemodel1_dict['created_at'], str)
         self.assertIsInstance(basemodel1_dict['updated_at'], str)
 
