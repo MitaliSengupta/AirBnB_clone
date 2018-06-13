@@ -19,6 +19,7 @@ Over the course of the next few months, we at [Holberton School](https://www.hol
 <p><img src="https://s3.amazonaws.com/intranet-projects-files/concepts/74/hbnb_step5.png" alt="Technology" width="629" height="335"></p>
 
 This repository contains several packages that include the various models that will be employed in the application as objects, a file storage schema class, and various tests written using the unittest module of Python.
+---
 
 ### Files in This Repository
 ---
@@ -75,6 +76,7 @@ This repository contains several packages that include the various models that w
 ```
 git clone git@github.com:MitaliSengupta/AirBnB_clone.git
 ```
+---
 
 ### Example Usage
 
@@ -141,11 +143,13 @@ $ echo "all" | ./console.py
 (hbnb) $
 $
 ```
+---
 
 ### Technologies Used
 * Language: Python3
 * Operating System: Ubuntu 14.04 LTS (Trusty64)
 * Style: PEP8 Ver. 1.7
+---
 
 ### Authors
 
