@@ -27,6 +27,7 @@ class TestFileStorage(unittest.TestCase):
         cls.usr.first_name = "Tay"
         cls.usr.last_name = "lor"
         cls.usr.email = "taylor@gmail.com"
+        cls.storage = FileStorage()
 
     @classmethod
     def teardown(cls):
@@ -71,16 +72,34 @@ class TestFileStorage(unittest.TestCase):
 
     def test_reload(self):
         """
-        Tests method: reload (reloads objects from string file)
+        reloading (reloads objects from string file)
         """
-        r_storage = FileStorage()
+        self.storage.save()
+        pth = os.path.dirname(os.path.abspath("console.py"))
+        pt = os.path.join(pth, "file.json")
+        with open(pt, 'r') as f:
+            lines = f.readlines()
+
         try:
-            os.remove("file.json")
-        except:
+            os.remove(pt)
+        except BaseException:
             pass
-        with open("file.json", "w") as f:
+
+        self.storage.save()
+
+        with open(pt, 'r') as f:
+            lines2 = f.readlines()
+
+        self.assertEqual(lines, lines2)
+
+        try:
+            os.remove(pt)
+        except BaseException:
+            pass
+
+        with open(pt, "w") as f:
             f.write("{}")
-        with open("file.json", "r") as r:
+        with open(pt, "r") as r:
             for line in r:
                 self.assertEqual(line, "{}")
-        self.assertIs(r_storage.reload(), None)
+        self.assertIs(self.storage.reload(), None)
