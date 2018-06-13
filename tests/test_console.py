@@ -64,6 +64,7 @@ class TestConsole(unittest.TestCase):
         self.assertIsNotNone(HBNBCommand.do_create.__doc__)
         self.assertIsNotNone(HBNBCommand.do_show.__doc__)
         self.assertIsNotNone(HBNBCommand.do_destroy.__doc__)
+        self.assertIsNotNone(HBNBCommand.do_count.__doc__)
         self.assertIsNotNone(HBNBCommand.do_all.__doc__)
         self.assertIsNotNone(HBNBCommand.do_update.__doc__)
         self.assertIsNotNone(HBNBCommand.default.__doc__)
@@ -77,7 +78,8 @@ class TestConsole(unittest.TestCase):
     def test_quit(self):
         """test quit command input"""
         with patch('sys.stdout', new=StringIO()) as f:
-            self.cnsl.onecmd("quit")
+            with self.assertRaises(SystemExit):
+                self.cnsl.onecmd("quit")
             self.assertEqual('', f.getvalue())
 
     def test_create(self):
