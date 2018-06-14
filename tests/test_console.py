@@ -200,5 +200,16 @@ class TestConsole(unittest.TestCase):
             with open(p, 'r') as rfl:
                 self.assertEqula("1", f.getvalue())
 
+    def test_classes_with_show(self):
+        """
+        Passing arguments to classes.show(id)
+        """
+        p = os.path.dirname(os.path.abspath("console.py"))
+        pat = os.path.join(p, "file.json")
+        with path('sys.stdout', new=StringIO()) as fl:
+            self.cnsl.onecmd("BaseModel.show()")
+            self.assertEqual("** class name missing **\n",
+                             f.getvalue())
+
 if __name__ == "__main__":
     unittest.main()
