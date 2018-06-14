@@ -184,18 +184,14 @@ class TestConsole(unittest.TestCase):
         """
         pth = os.path.dirname(os.path.abspath("console.py"))
         pt = os.path.join(pth, "file.json")
-        try:
-            with patch('sys.stdout', new=StringIO()) as f:
-                self.cnsl.onecmd("BaseModel.all()")
-                with open(pt, 'r') as rf:
-                    self.assertEqual("[[BaseModel]", f.getvalue()[:12])
-            with patch('sys.stdout', new=StringIO()) as f:
-                self.cnsl.onecmd("User.all()")
-                with open(pt, 'r') as rf:
-                    self.assertEqual("[[User]", f.getvalue()[:7])
-        except Exception:
-            pass
-
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.cnsl.onecmd("BaseModel.all()")
+            with open(pt, 'r') as rf:
+                self.assertEqual("[[BaseModel]", f.getvalue()[:12])
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.cnsl.onecmd("User.all()")
+            with open(pt, 'r') as rf:
+                self.assertEqual("[[User]", f.getvalue()[:7])
 
 
 if __name__ == "__main__":
