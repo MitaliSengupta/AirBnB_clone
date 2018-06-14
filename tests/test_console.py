@@ -180,7 +180,7 @@ class TestConsole(unittest.TestCase):
 
     def test_classes_with_all(self):
         """
-        Passing arguments to BaseModel.all()
+        Passing arguments to classes.all()
         """
         pth = os.path.dirname(os.path.abspath("console.py"))
         pt = os.path.join(pth, "file.json")
@@ -188,11 +188,17 @@ class TestConsole(unittest.TestCase):
             self.cnsl.onecmd("BaseModel.all()")
             with open(pt, 'r') as rf:
                 self.assertEqual("[[BaseModel]", f.getvalue()[:12])
-        with patch('sys.stdout', new=StringIO()) as f:
-            self.cnsl.onecmd("User.all()")
-            with open(pt, 'r') as rf:
-                self.assertEqual("[[User]", f.getvalue()[:7])
 
+    def test_classes_with_count(self):
+        """
+        Passing arguments to classes.count()
+        """
+        p = os.path.dirname(os.path.abspath("console.py"))
+        pat = os.path.join(p, "file.json")
+        with path('sys.stdout', new=StringIO()) as fl:
+            self.cnsl.onecmd("BaseModel.count()")
+            with open(p, 'r') as rfl:
+                self.assertEqula("1", f.getvalue())
 
 if __name__ == "__main__":
     unittest.main()
