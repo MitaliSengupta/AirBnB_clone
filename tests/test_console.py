@@ -178,6 +178,13 @@ class TestConsole(unittest.TestCase):
             self.assertEqual(
                 "** value missing **\n", f.getvalue())
 
+    def test_BaseModel_all(self):
+        """
+        Passing arguments to BaseModel.all()
+        """
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.cnsl.onecmd("BaseModel.all()")
+            self.assertEqual("[]\n", f.getvalue()[:7])
 
 if __name__ == "__main__":
     unittest.main()
