@@ -222,6 +222,17 @@ class TestConsole(unittest.TestCase):
             self.assertEqual("** id is missing **\n",
                              f.getvalue())
 
+    def test_classes_with_update(self):
+        """
+        Passing arguments to classes.destroy(id)
+        """
+        p = os.path.dirname(os.path.abspath("console.py"))
+        pat = os.path.join(p, "file.json")
+        with path('sys.stdout', new=StringIO()) as fl:
+            self.cnsl.onecmd("BaseModel.update()")
+            self.assertEqual("** id is missing **\n",
+                             f.getvalue())
+
 
 if __name__ == "__main__":
     unittest.main()
