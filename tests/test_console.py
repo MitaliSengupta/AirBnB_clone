@@ -182,9 +182,16 @@ class TestConsole(unittest.TestCase):
         """
         Passing arguments to BaseModel.all()
         """
+        pth = os.path.dirname(os.path.abspath("console.py"))
+        pt = os.path.join(pth, "file.json")
         with patch('sys.stdout', new=StringIO()) as f:
             self.cnsl.onecmd("BaseModel.all()")
-            self.assertEqual("[]\n", f.getvalue()[:7])
+            with open(pt, 'r') as rf:
+                self.assertEqual("[[BaseModel]", f.getvalue()[:12])
+        with patch('sys.stdout', new=StringIO()) as f:
+            self.cnsl.onecmd("User.all()")
+            with open(pt, 'r') as rf:
+                self.assertEqual("[[User]", f.getvalue()[:7])
 
 if __name__ == "__main__":
     unittest.main()
