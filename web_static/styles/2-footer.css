@@ -4,12 +4,10 @@ footer {
     width: 100%;
     position: fixed;
     bottom: 0;
+    text-align: center;
 }
 
 p {
     top: 10%;
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
 }
