@@ -4,10 +4,10 @@
 
 ### Contents
 
-* [Description](https://github.com/MitaliSengupta/AirBnB_clone/web_static#description)
-* [Files in This Repository](https://github.com/MitaliSengupta/AirBnB_clone/web_static#files-in-this-repository)
-* [Technologies Used](https://github.com/MitaliSengupta/AirBnB_clone/web_static#technologies-used)
-* [Authors](https://github.com/MitaliSengupta/AirBnB_clone/web_static#authors)
+* [Description](https://github.com/MitaliSengupta/AirBnB_clone/tree/master/web_static#description)
+* [Files in This Repository](https://github.com/MitaliSengupta/AirBnB_clone/tree/master/web_static#files-in-this-repository)
+* [Technologies Used](https://github.com/MitaliSengupta/AirBnB_clone/tree/master/web_static#technologies-used)
+* [Authors](https://github.com/MitaliSengupta/AirBnB_clone/tree/master/web_static#authors)
 ---
 
 ### Description
