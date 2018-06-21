@@ -16,8 +16,7 @@ button {
     border-style: none;
     border-radius: 4px;
     position: absolute;
-    top: 50%;
-    margin-top: -24px;
+    top: 15%;
     right: 30px;
 }
 
