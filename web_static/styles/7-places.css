@@ -1,7 +1,7 @@
 .places h1 {
 	font-size: 30px;
 }
-.results {
+.listings {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
