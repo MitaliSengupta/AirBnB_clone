@@ -17,13 +17,12 @@
 .places h2 {
     font-size: 30px;
     text-align: center;
-    margin-top: 0;
 }
 
-div .listing_item {
+.listing_item {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .price_by_night {
@@ -36,8 +35,8 @@ div .listing_item {
 }
 
 .price_by_night p {
-	margin-top: 15px;
-	margin-right: 4px;
+    margin-top: 15px;
+    text-align: center;
 }
 .information {
 	height: 80px;
