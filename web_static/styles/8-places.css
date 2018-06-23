@@ -23,7 +23,7 @@
 .listing_item {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .price_by_night {
