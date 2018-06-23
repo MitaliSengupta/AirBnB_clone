@@ -8,6 +8,6 @@ footer {
     bottom: 0;
 }
 
-p {
+footer>p {
     margin-top: 23px;
 }
