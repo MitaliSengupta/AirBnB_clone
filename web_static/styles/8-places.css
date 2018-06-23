@@ -24,6 +24,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-top: 0px;
+    margin-bottom: 5px;
 }
 
 .price_by_night {
@@ -45,23 +47,29 @@
 	border-top: 1px solid #DDD;
 	border-bottom: 1px solid #DDD;
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: center;
 }
 .information p {
-	padding-top: 35px;
+    padding-top: 35px;
+    align-items: center;
 }
 .max_guest, .number_rooms, .number_bathrooms {
 	width: 100px;
 }
 .max_guest {
     background: url('../images/icon_group.png') no-repeat;
-    margin-top: 5px;
+    margin-top: 10px;
+    background-position-x: center;
 }
 .number_rooms{
     background: url('../images/icon_bed.png') no-repeat;
-    margin-top: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-position-x: center;
 }
 .number_bathrooms{
     background: url('../images/icon_bath.png') no-repeat;
-    margin-top: 5px;
+    margin-top: 10px;
+    background-position-x: center;
 }
