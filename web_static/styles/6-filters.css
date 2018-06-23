@@ -32,6 +32,10 @@ button:hover {
 .filters h3, h4 {
     margin-left: 15%;
 }
+
+.filters h2 {
+    margin-bottom: 2px;
+}
 .locations {
     border-right: 1px solid #DDDDDD;
 }
