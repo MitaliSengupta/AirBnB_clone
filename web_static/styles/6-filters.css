@@ -33,7 +33,7 @@ button:hover {
     margin-left: 15%;
 }
 
-.filters h2 {
+.filters>h2 {
     margin-bottom: 2px;
 }
 .locations {
