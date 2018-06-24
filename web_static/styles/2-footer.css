@@ -7,6 +7,6 @@ footer {
     text-align: center;
 }
 
-p {
+footer > p {
     margin-top: 23px;
 }
