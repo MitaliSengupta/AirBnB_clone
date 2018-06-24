@@ -33,9 +33,10 @@ button:hover {
     margin-left: 15%;
 }
 
-.popover .ul h2 {
+.popover h2 {
     margin-bottom: 2px;
 }
+
 .locations {
     border-right: 1px solid #DDDDDD;
 }
@@ -65,6 +66,15 @@ button:hover {
 .popover ul {
     list-style-type: none;
 }
+
+.popover .li_item {
+    margin-left: -20px;
+}
+
+.popover .li_pad {
+    line-height: 25px;
+}
+
 .amenities:hover .popover,
 .locations:hover .popover {
     visibility: visible;
