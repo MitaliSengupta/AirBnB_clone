@@ -40,9 +40,7 @@ button:hover {
 .locations {
     border-right: 1px solid #DDDDDD;
 }
-.amenities {
-    margin-left: -4px;
-}
+
 .filters h3 {
     font-weight: 600;
     margin-bottom: 0;
