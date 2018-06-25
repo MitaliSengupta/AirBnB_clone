@@ -24,7 +24,7 @@
 .places h2 {
     font-size: 30px;
     text-align: center;
-    margin: 10px 0 40px 30%;
+    margin: auto;
 }
 
 .listing_item {
@@ -32,7 +32,7 @@
     flex-direction: row;
     justify-content: space-between;
     margin-top: 0px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .price_by_night {
