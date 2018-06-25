@@ -1,9 +1,7 @@
 .places {
-    font-size: 30px;
-    display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 30px;
 }
 .listings {
     display: flex;
