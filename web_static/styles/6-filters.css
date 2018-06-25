@@ -25,10 +25,19 @@ button:hover {
 .filters div {
     display: inline-grid;
 }
-.locations, .amenities {
+
+.filters > .locations {
     height: 100%;
     width: 25%;
 }
+
+
+.filters > .amenities {
+    height: 100%;
+    width: 25%;
+    margin-left: -4px;
+}
+
 .filters h3, h4 {
     margin-left: 15%;
 }
