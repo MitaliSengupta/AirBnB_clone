@@ -58,7 +58,7 @@
 }
 .information p {
     padding-top: 35px;
-    align-items: center;
+    text-align: center;
 }
 .max_guest, .number_rooms, .number_bathrooms {
 	width: 100px;
