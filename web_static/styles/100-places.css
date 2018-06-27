@@ -88,15 +88,13 @@
     width: auto;
     flex: 1;
     height: auto;
+    margin-top: 40px;
 }
 .amenities ul, .reviews ul {
     list-style: none;
     padding-left: 0px;
 }
 
-.description {
-    padding-bottom: 8%;
-}
 .amenities li {
     padding-bottom: 3px;
     text-indent: 30px;
